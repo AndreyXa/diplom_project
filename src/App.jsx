@@ -1,7 +1,5 @@
 import React from 'react';
 import {Header} from "../src/Components/Header/Header";
-import styled from './App.module.css';
-import {MainNav} from "./Components/MainNav";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Container} from "@mui/material";
 import {Trending} from "./Pages/Trending";
@@ -13,7 +11,6 @@ export const App = () => {
     return (
         <BrowserRouter>
             <Header/>
-            <MainNav/>
             <div>
                 <Container>
                     <Switch>

@@ -3,3 +3,17 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+.pageTitle {
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.5rem;
+    padding: 4px;
+    border-radius: 50px;
+    color: black;
+}
+
+.pagination {
+    margin-top: 10px;
+}

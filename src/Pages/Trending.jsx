@@ -10,7 +10,7 @@ export const Trending = () => {
     const [page, setPage] = useState(1);
 
     const fetchTrending = async () => {
-        const {data} = await axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=e9e3f515fc57336efd9167d5b156073d&page=${page}`);
+        const {data} = await axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`);
         setContent(data.results);
     };
 
@@ -24,7 +24,7 @@ export const Trending = () => {
 
     return (
         <div >
-            <span>Trending</span>
+            <span className={styled.pageTitle}>Trending</span>
             <div className={styled.trending}>
                 {
                     content && content.map((item) => (
@@ -45,6 +45,7 @@ export const Trending = () => {
                 color="primary"
                 hideNextButton
                 hidePrevButton
+                className={styled.pagination}
             />
         </div>
     );

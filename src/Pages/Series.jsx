@@ -17,7 +17,7 @@ export const Series = () => {
 
     const fetchMovies = async () => {
         const {data} = await axios.get(
-            `https://api.themoviedb.org/3/discover/tv?api_key=e9e3f515fc57336efd9167d5b156073d&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&page=${page}&with_genres=${genreforURL}`
+            `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&page=${page}&with_genres=${genreforURL}`
         );
         console.log(data);
         setContent(data.results);
@@ -34,7 +34,7 @@ export const Series = () => {
 
     return (
         <div >
-            <span>TV Series</span>
+            <span className={styled.pageTitle}>TV Series</span>
             <Genres
                 type="tv"
                 selectedGenres={selectedGenres}
@@ -63,6 +63,7 @@ export const Series = () => {
                 color="primary"
                 hideNextButton
                 hidePrevButton
+                className={styled.pagination}
             />
         </div>
     );

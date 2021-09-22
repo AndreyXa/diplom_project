@@ -4,29 +4,49 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import styled from './TransitionsModal.module.css';
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {img_500, unavailable, unavailableLandscape} from "../../config/config";
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
 };
 
 export const TransitionsModal = ({children, media_type, id}) => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [content, setContent] = useState();
+    const [video, setVideo] = useState();
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const fetchData = async () => {
+        const {data} = await axios.get(
+            `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+        )
+        console.log(data);
+        setContent(data);
+    };
+
+    const fetchVideo = async () => {
+        const {data} = await axios.get(
+            `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+        );
+        console.log(data);
+        setVideo(data.results[0]?.key);
+    };
+
+    useEffect(() => {
+        fetchData();
+        fetchVideo();
+    }, []);
+
     return (
         <div>
-            <Button onClick={handleOpen} className={styled.media}>{children}</Button>
+            <div onClick={handleOpen} className={styled.media}>{children}</div>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -40,12 +60,47 @@ export const TransitionsModal = ({children, media_type, id}) => {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                        <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Text in a modal
-                        </Typography>
-                        <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                        </Typography>
+                        {content && (
+                            <div className={styled.paper}>
+                                <div className={styled.ContentModal}>
+                                    <img
+                                        src={
+                                            content.poster_path
+                                                ? `${img_500}/${content.poster_path}`
+                                                : unavailable
+                                        }
+                                        className={styled.ContentModal__portrait}
+                                    />
+                                    <img
+                                        src={
+                                            content.backdrop_path
+                                                ? `${img_500}/${content.backdrop_path}`
+                                                : unavailableLandscape
+                                        }
+                                        className={styled.ContentModal__landscape}
+                                    />
+                                    <div className={styled.ContentModal__about}>
+                  <span className={styled.ContentModal__title}>
+                      {content.title} {" "}
+                      {content.release_date}
+                  </span>
+                                        <span className={styled.ContentModal__description}>
+                    {content.overview}
+
+                  </span>
+
+                                        <Button
+                                            variant="contained"
+                                            color="secondary"
+                                            target="__blank"
+                                            href={`https://www.youtube.com/watch?v=${video}`}
+                                        >
+                                            Watch the Trailer
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </Box>
                 </Fade>
             </Modal>

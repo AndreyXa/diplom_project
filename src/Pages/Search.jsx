@@ -15,7 +15,7 @@ export const Search = () => {
     const [numOfPages, setNumOfPages] = useState();
 
     const fetchSearch = async () => {
-        const {data} = await axios.get(`https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=e9e3f515fc57336efd9167d5b156073d&language=en-US&query=${searchText}&page=${page}&include_adult=false`);
+        const {data} = await axios.get(`https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${searchText}&page=${page}&include_adult=false`);
 
         setContent(data.results);
         setNumOfPages(data.total_pages);
@@ -34,7 +34,7 @@ export const Search = () => {
 
     return (
         <div>
-            <span>Search</span>
+            <span className={styled.pageTitle}>Search</span>
             <div>
                 <TextField
                     style={{flex: 1}}
@@ -87,6 +87,7 @@ export const Search = () => {
                 color="primary"
                 hideNextButton
                 hidePrevButton
+                className={styled.pagination}
             />
         </div>
     );
