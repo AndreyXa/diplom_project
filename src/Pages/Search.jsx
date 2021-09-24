@@ -3,7 +3,6 @@ import {Button, Tab, Tabs, TextField} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import {SingleContent} from "../Components/SingleContext/SingleContent";
 import {Pagination} from "@mui/material";
-import axios from "axios";
 import styled from "./page.module.css";
 
 export const Search = () => {
@@ -15,12 +14,11 @@ export const Search = () => {
     const [numOfPages, setNumOfPages] = useState();
 
     const fetchSearch = async () => {
-        const {data} = await axios.get(`https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${searchText}&page=${page}&include_adult=false`);
-
-        setContent(data.results);
-        setNumOfPages(data.total_pages);
-    };
-
+        const response = await fetch(`https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${searchText}&page=${page}&include_adult=false`);
+            const data = await response.json();
+            setContent(data.results);
+            setNumOfPages(data.total_pages);
+    }
 
     useEffect(() => {
         fetchSearch();

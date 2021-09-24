@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import axios from "axios";
 import {Chip} from "@material-ui/core";
 
 export const Genres = ({
@@ -12,11 +11,14 @@ export const Genres = ({
                        }) => {
 
     const fetchGenres = async () => {
-        const {data} = await axios.get(
-            `https://api.themoviedb.org/3/genre/${type}/list?api_key=e9e3f515fc57336efd9167d5b156073d&language=en-US`
-        );
-        setGenres(data.genres);
-    };
+        const response = await fetch( `https://api.themoviedb.org/3/genre/${type}/list?api_key=e9e3f515fc57336efd9167d5b156073d&language=en-US`);
+        if (response.ok) {
+            const data = await response.json();
+            setGenres(data.genres);
+        } else {
+            alert("error" + response.status);
+        }
+    }
 
     useEffect(() => {
         fetchGenres();

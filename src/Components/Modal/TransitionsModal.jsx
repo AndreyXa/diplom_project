@@ -6,7 +6,6 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import styled from './TransitionsModal.module.css';
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {img_500, unavailable, unavailableLandscape} from "../../config/config";
 
 const style = {
@@ -24,20 +23,26 @@ export const TransitionsModal = ({children, media_type, id}) => {
     const handleClose = () => setOpen(false);
 
     const fetchData = async () => {
-        const {data} = await axios.get(
-            `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
-        )
-        console.log(data);
-        setContent(data);
-    };
+        const response = await fetch(  `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            setContent(data);
+        } else {
+            alert("error" + response.status);
+        }
+    }
 
     const fetchVideo = async () => {
-        const {data} = await axios.get(
-            `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
-        );
-        console.log(data);
-        setVideo(data.results[0]?.key);
-    };
+        const response = await fetch(  `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            setVideo(data.results[0]?.key);
+        } else {
+            alert("error" + response.status);
+        }
+    }
 
     useEffect(() => {
         fetchData();
@@ -81,7 +86,7 @@ export const TransitionsModal = ({children, media_type, id}) => {
                                     />
                                     <div className={styled.ContentModal__about}>
                   <span className={styled.ContentModal__title}>
-                      {content.title} {" "}
+                      {content.title || content.name} {" "}
                       {content.release_date}
                   </span>
                                         <span className={styled.ContentModal__description}>

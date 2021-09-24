@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import styled from "./page.module.css";
 import {SingleContent} from "../Components/SingleContext/SingleContent";
 import {Pagination} from "@mui/material";
@@ -15,13 +14,17 @@ export const Movies = () => {
     const [selectedGenres, setSelectedGenres] = useState([]);
     const genreforURL = useGenre(selectedGenres);
 
+
     const fetchMovies = async () => {
-        const {data} = await axios.get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&page=${page}&with_genres=${genreforURL}`
-        );
-        setContent(data.results);
-        setNumOfPages(data.total_pages);
-    };
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&page=${page}&with_genres=${genreforURL}`);
+        if (response.ok) {
+            const data = await response.json();
+            setContent(data.results);
+            setNumOfPages(data.total_pages);
+        } else {
+            alert("error" + response.status);
+        }
+    }
 
     useEffect(() => {
         fetchMovies();
@@ -33,7 +36,7 @@ export const Movies = () => {
 
     return (
         <div >
-            <span className={styled.pageTitle}>Discover Movies</span>
+            <span className={styled.pageTitle}>Movies</span>
             <Genres
                 type="movie"
                 selectedGenres={selectedGenres}

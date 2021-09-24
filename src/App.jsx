@@ -1,24 +1,35 @@
-import React from 'react';
-import {Header} from "../src/Components/Header/Header";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import React, {useState} from 'react';
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {Container} from "@mui/material";
-import {Trending} from "./Pages/Trending";
-import {Movies} from "./Pages/Movies";
-import {Series} from "./Pages/Series";
-import {Search} from "./Pages/Search";
+import {UseRouter} from "./route/UseRouter";
 
 export const App = () => {
+
     return (
         <BrowserRouter>
-            <Header/>
+            {/*<Header/>*/}
             <div>
                 <Container>
-                    <Switch>
-                        <Route path='/' exact component={Trending}/>
-                        <Route path='/movies' component={Movies}/>
-                        <Route path='/series' component={Series}/>
-                        <Route path='/search' component={Search}/>
-                    </Switch>
+                    <UseRouter/>
+                    {/*<Switch>*/}
+                    {/*    <Route path='/' exact>*/}
+                    {/*        <Trending/>*/}
+                    {/*    </Route>*/}
+                    {/*    <Route path='/movies'>*/}
+                    {/*        <Movies/>*/}
+                    {/*    </Route>*/}
+                    {/*    <Route path='/series'>*/}
+                    {/*        <Series/>*/}
+                    {/*    </Route>*/}
+                    {/*    <Route path='/search'>*/}
+                    {/*        <Search/>*/}
+                    {/*    </Route>*/}
+                    {/*    <Route path='/login'>*/}
+                    {/*        {*/}
+                    {/*            user === null ? <Login setUser={setUser}/> : <Redirect to='/' />*/}
+                    {/*        }*/}
+                    {/*    </Route>*/}
+                    {/*</Switch>*/}
                 </Container>
             </div>
         </BrowserRouter>
