@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from './LoginOut.module.css';
 
 export const LoginOut = ({user, setUser}) => {
