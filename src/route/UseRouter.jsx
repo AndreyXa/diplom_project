@@ -14,32 +14,12 @@ export const UseRouter = () => {
     console.log(user);
     if (user === null) {
         return (
-            <>
                 <Switch>
                     <Route path='/'>
                         <Login setUser={setUser}/>
                         <Redirect to='/trending'/>
                     </Route>
                 </Switch>
-                {/*<Header user={user.name}/>*/}
-                {/*<Switch>*/}
-                {/*    <Route path='/trending'>*/}
-                {/*        <Trending/>*/}
-                {/*    </Route>*/}
-                {/*    <Route path='/movies'>*/}
-                {/*        <Movies/>*/}
-                {/*    </Route>*/}
-                {/*    <Route path='/series'>*/}
-                {/*        <Series/>*/}
-                {/*    </Route>*/}
-                {/*    <Route path='/search'>*/}
-                {/*        <Search/>*/}
-                {/*    </Route>*/}
-                {/*    <Route path='/logout'>*/}
-                {/*        <LoginOut user={user.name} setUser={setUser}/>*/}
-                {/*    </Route>*/}
-                {/*</Switch>*/}
-            </>
         );
     }
     return (
@@ -63,6 +43,5 @@ export const UseRouter = () => {
                 </Route>
             </Switch>
         </>
-
     );
 };

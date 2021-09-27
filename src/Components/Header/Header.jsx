@@ -14,8 +14,7 @@ export const Header = ({user}) => {
                     <li className="nav-item">
                         <Link
                             className="nav-link navbar-text3"
-                            to="/trending"
-                            exaxt>
+                            to="/trending">
                             Trending
                         </Link>
                     </li>
