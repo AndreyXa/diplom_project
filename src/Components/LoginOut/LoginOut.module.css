@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,700&display=swap');
+
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.loginText {
+    margin-bottom: 30px;
+    font-size: 35px;
+    color: black;
+    font-family: Ubuntu sans-serif;
+}
+
+.loginButton {
+    font-size: 35px;
+    padding: 10px 40px;
+    background-color: palegoldenrod;
+    font-family: Ubuntu sans-serif;
+}
+
+.loginButtonText {
+    text-transform: uppercase;
+    color: black;
+}

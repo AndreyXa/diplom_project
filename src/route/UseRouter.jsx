@@ -6,6 +6,7 @@ import {Series} from "../Pages/Series";
 import {Search} from "../Pages/Search";
 import {Login} from "../Pages/Login";
 import {Header} from "../Components/Header/Header";
+import {LoginOut} from "../Components/LoginOut/LoginOut";
 
 export const UseRouter = () => {
     const [user, setUser] = useState(null);
@@ -27,6 +28,9 @@ export const UseRouter = () => {
                     <Route path='/search'>
                         <Search/>
                     </Route>
+                    <Route path='/logout'>
+                        <LoginOut setUser={setUser}/>
+                    </Route>
                 </Switch>
             </div>
         );
@@ -34,7 +38,8 @@ export const UseRouter = () => {
     return (
         <Switch>
             <Route path='/'>
-                 <Login setUser={setUser}/>
+                <Login setUser={setUser}/>
+                <Redirect to='/trending'/>
             </Route>
         </Switch>
     );

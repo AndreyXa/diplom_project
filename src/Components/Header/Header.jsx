@@ -38,7 +38,12 @@ export const Header = ({user}) => {
                             to="/search">Search
                         </Link>
                     </li>
-                    <LoginOut />
+                    <li className="nav-item">
+                        <Link
+                            className="nav-link navbar-text3"
+                            to="/logout">LogOut
+                        </Link>
+                    </li>
                     {/*<li className="nav-item">*/}
                     {/*    <Link*/}
                     {/*        className="nav-link"*/}
