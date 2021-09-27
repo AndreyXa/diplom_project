@@ -1,51 +1,49 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import './Header.css';
+import styled from './Header.module.css';
 
 export const Header = ({user}) => {
 
     return (
-        <div>
-            <nav className="navbar navbar-dark navbar-expand-lg bg-primary navbar-nav">
-                <div className="navbar-brand navbar-title">
-                    <span className="navbar-text2">Movies App {user}</span>
+        <>
+            <nav className={styled.navbar}>
+                <div className={styled.navbarTitle}>
+                    <span className={styled.navbarTextTitle}>Movies App {user}</span>
                 </div>
-                <ul className="navbar-nav">
-                    <li className="nav-item">
+                <ul className={styled.navbarList}>
+                    <li className={styled.navbarItem}>
                         <Link
-                            className="nav-link navbar-text3"
+                            className={styled.navbarLink}
                             to="/trending">
                             Trending
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={styled.navbarItem}>
                         <Link
-                            className="nav-link navbar-text3"
+                            className={styled.navbarLink}
                             to="/movies">Movies
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={styled.navbarItem}>
                         <Link
-                            className="nav-link navbar-text3"
+                            className={styled.navbarLink}
                             to="/series">TV Series
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={styled.navbarItem}>
                         <Link
-                            className="nav-link navbar-text3"
+                            className={styled.navbarLink}
                             to="/search">Search
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={styled.navbarItem}>
                         <Link
-                            className="nav-link navbar-text3"
+                            className={styled.navbarLink}
                             to="/logout">LogOut
                         </Link>
                     </li>
                 </ul>
             </nav>
-
-        </div>
-
+        </>
     );
 };
