@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from './LoginOut.module.css';
 
-export const LoginOut = ({setUser}) => {
+export const LoginOut = ({user, setUser}) => {
 
     const handleSubmit = () => {
         setUser(null);
@@ -9,7 +9,7 @@ export const LoginOut = ({setUser}) => {
 
     return (
         <div className={styled.loginContainer}>
-            <span className={styled.loginText}>Are you leaving us so quickly?</span>
+            <span className={styled.loginText}>Are you leaving us so quickly? {user}???</span>
             <button className={styled.loginButton}
                     onClick={handleSubmit}>
                 <span

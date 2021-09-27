@@ -8,39 +8,61 @@ import {Login} from "../Pages/Login";
 import {Header} from "../Components/Header/Header";
 import {LoginOut} from "../Components/LoginOut/LoginOut";
 
+
 export const UseRouter = () => {
     const [user, setUser] = useState(null);
     console.log(user);
-    if (user != null) {
+    if (user === null) {
         return (
-            <div>
-                <Header user={user.login}/>
+            <>
                 <Switch>
-                    <Route path='/trending'>
-                        <Trending/>
-                    </Route>
-                    <Route path='/movies'>
-                        <Movies/>
-                    </Route>
-                    <Route path='/series'>
-                        <Series/>
-                    </Route>
-                    <Route path='/search'>
-                        <Search/>
-                    </Route>
-                    <Route path='/logout'>
-                        <LoginOut setUser={setUser}/>
+                    <Route path='/'>
+                        <Login setUser={setUser}/>
+                        <Redirect to='/trending'/>
                     </Route>
                 </Switch>
-            </div>
+                {/*<Header user={user.name}/>*/}
+                {/*<Switch>*/}
+                {/*    <Route path='/trending'>*/}
+                {/*        <Trending/>*/}
+                {/*    </Route>*/}
+                {/*    <Route path='/movies'>*/}
+                {/*        <Movies/>*/}
+                {/*    </Route>*/}
+                {/*    <Route path='/series'>*/}
+                {/*        <Series/>*/}
+                {/*    </Route>*/}
+                {/*    <Route path='/search'>*/}
+                {/*        <Search/>*/}
+                {/*    </Route>*/}
+                {/*    <Route path='/logout'>*/}
+                {/*        <LoginOut user={user.name} setUser={setUser}/>*/}
+                {/*    </Route>*/}
+                {/*</Switch>*/}
+            </>
         );
     }
     return (
-        <Switch>
-            <Route path='/'>
-                <Login setUser={setUser}/>
-                <Redirect to='/trending'/>
-            </Route>
-        </Switch>
+        <>
+            <Header user={user.name}/>
+            <Switch>
+                <Route path='/trending'>
+                    <Trending/>
+                </Route>
+                <Route path='/movies'>
+                    <Movies/>
+                </Route>
+                <Route path='/series'>
+                    <Series/>
+                </Route>
+                <Route path='/search'>
+                    <Search/>
+                </Route>
+                <Route path='/logout'>
+                    <LoginOut user={user.name} setUser={setUser}/>
+                </Route>
+            </Switch>
+        </>
+
     );
 };

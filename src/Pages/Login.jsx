@@ -3,9 +3,9 @@ import {
     Box,
     Button,
     Container,
-    CssBaseline,
+    CssBaseline, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
     Grid,
-    Input,
+    Input, TextField,
     Typography,
 } from "@material-ui/core";
 import { useState } from "react";
@@ -13,6 +13,12 @@ import { useState } from "react";
 export const Login = ({ setUser }) => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [open, setOpen] = useState(false);
+
+    const handleInputName = (e) => {
+        setName(e.target.value);
+    };
 
     const handleInputLog = (e) => {
         setLogin(e.target.value);
@@ -34,12 +40,22 @@ export const Login = ({ setUser }) => {
             setPassword("");
         }
     };
+
+    const handleclickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const getNewUser = async () => {
         await fetch("http://localhost:3000/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ login, password }),
+            body: JSON.stringify({ name, login, password }),
         });
+        setOpen(false);
     };
 
     return (
@@ -86,13 +102,54 @@ export const Login = ({ setUser }) => {
                             Login In
                         </Button>
                         <Button
-                            onClick={getNewUser}
+                            onClick={handleclickOpen}
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
                             New User
                         </Button>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="form-dialog-title">
+                            <DialogTitle id="form-dialog-title">Registration Form</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText>
+                                    Registration in users
+                                </DialogContentText>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Name"
+                                    type="text"
+                                    fullWidth
+                                    onChange={handleInputName}
+                                /><TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="log"
+                                    label="Login"
+                                    type="email"
+                                    fullWidth
+                                    onChange={handleInputLog}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="pas"
+                                    label="Password"
+                                    type="password"
+                                    fullWidth
+                                    onChange={handleInputPass}
+                                />
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} color="primary">Cancel</Button>
+                                <Button onClick={getNewUser} color="primary">Log in</Button>
+                            </DialogActions>
+                        </Dialog>
                         <Grid container>
                             <Grid item></Grid>
                         </Grid>
