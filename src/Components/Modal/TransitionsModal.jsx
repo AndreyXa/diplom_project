@@ -6,7 +6,8 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import styled from './TransitionsModal.module.css';
 import {useEffect, useState} from "react";
-import {img_500, unavailable, unavailableLandscape} from "../../config/config";
+import unavailable from "../../assets/unavailable.jpeg";
+import unavailableLandscape from "../../assets/unavailableLandscape.jpeg";
 
 const style = {
     position: 'absolute',
@@ -71,7 +72,7 @@ export const TransitionsModal = ({children, media_type, id}) => {
                                     <img
                                         src={
                                             content.poster_path
-                                                ? `${img_500}/${content.poster_path}`
+                                                ? `https://image.tmdb.org/t/p/w500/${content.poster_path}`
                                                 : unavailable
                                         }
                                         className={styled.ContentModal__portrait}
@@ -79,7 +80,7 @@ export const TransitionsModal = ({children, media_type, id}) => {
                                     <img
                                         src={
                                             content.backdrop_path
-                                                ? `${img_500}/${content.backdrop_path}`
+                                                ? `https://image.tmdb.org/t/p/w500/${content.backdrop_path}`
                                                 : unavailableLandscape
                                         }
                                         className={styled.ContentModal__landscape}

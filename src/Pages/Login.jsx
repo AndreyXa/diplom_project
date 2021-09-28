@@ -9,7 +9,6 @@ import {
     Typography,
 } from "@material-ui/core";
 import { useState } from "react";
-import {addUser} from "../Request/request";
 
 export const Login = ({ setUser }) => {
     const [login, setLogin] = useState("");
