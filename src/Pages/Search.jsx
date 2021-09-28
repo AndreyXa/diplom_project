@@ -26,10 +26,6 @@ export const Search = () => {
     }, [type, page]);
 
 
-    const handlePageChange = (e) => {
-        setPage(e);
-    };
-
     return (
         <div>
             <span className={styled.pageTitle}>Search</span>
@@ -80,7 +76,7 @@ export const Search = () => {
                 ))}
             </div>
             <Pagination
-                onChange={(e) => handlePageChange(e.target.textContent)}
+                onChange={(e) => setPage(e.target.textContent)}
                 count={numOfPages}
                 color="primary"
                 hideNextButton

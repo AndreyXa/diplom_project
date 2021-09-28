@@ -3,7 +3,7 @@ import styled from "./page.module.css";
 import {SingleContent} from "../Components/SingleContext/SingleContent";
 import {Pagination} from "@mui/material";
 import {Genres} from "../Components/Genres/Genres";
-import {useGenre} from "../hooks/useGenre";
+import {useGenre} from "../helper/useGenre";
 
 export const Movies = () => {
 
