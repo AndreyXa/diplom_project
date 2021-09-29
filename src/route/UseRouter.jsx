@@ -9,11 +9,10 @@ import {Header} from "../Components/Header/Header";
 import {LoginOut} from "../Components/LoginOut/LoginOut";
 
 
+
 export const UseRouter = () => {
     const [user, setUser] = useState(null);
     const [auth, setAuth] = useState(true);
-
-
     console.log(user);
     if (user === null) {
         return (
