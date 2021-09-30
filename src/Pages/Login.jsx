@@ -8,17 +8,14 @@ import {
     Input, TextField,
     Typography,
 } from "@material-ui/core";
-import { useState } from "react";
+import {useState} from "react";
+import {createUser, listenToUserChange, signIn} from "../firebase/auth";
 
-export const Login = ({ setUser }) => {
+export const Login = () => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
     const [open, setOpen] = useState(false);
 
-    const handleInputName = (e) => {
-        setName(e.target.value);
-    };
 
     const handleInputLog = (e) => {
         setLogin(e.target.value);
@@ -30,15 +27,7 @@ export const Login = ({ setUser }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(
-            `http://localhost:3000/users/?login=${login}&password=${password}`
-        );
-        const users = await response.json();
-        if (users.length > 0) {
-            setUser(users[0]);
-            setLogin("");
-            setPassword("");
-        }
+        signIn(login,password);
     };
 
     const handleclickOpen = () => {
@@ -50,12 +39,7 @@ export const Login = ({ setUser }) => {
     };
 
     const getNewUser = async () => {
-        await fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, login, password }),
-        });
-        setOpen(false);
+        createUser(login,password);
     };
 
     return (
@@ -119,14 +103,6 @@ export const Login = ({ setUser }) => {
                                     Registration in users
                                 </DialogContentText>
                                 <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="name"
-                                    label="Name"
-                                    type="text"
-                                    fullWidth
-                                    onChange={handleInputName}
-                                /><TextField
                                     autoFocus
                                     margin="dense"
                                     id="log"

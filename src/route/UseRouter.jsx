@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Redirect, Route, Switch} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {Redirect, Route, Switch, useHistory} from "react-router-dom";
 import {Trending} from "../Pages/Trending";
 import {Movies} from "../Pages/Movies";
 import {Series} from "../Pages/Series";
@@ -9,26 +9,34 @@ import {Header} from "../Components/Header/Header";
 import {LoginOut} from "../Components/LoginOut/LoginOut";
 
 
-
 export const UseRouter = () => {
     const [user, setUser] = useState(null);
     const [auth, setAuth] = useState(true);
+    const history = useHistory();
     console.log(user);
-    if (user === null) {
-        return (
-                <Switch>
-                    <Route path='/'>
-                        {
-                            auth ? <Login setUser={setUser}/> : <Redirect to='/trending'/>
-                        }
-                    </Route>
-                </Switch>
-        );
-    }
+
+    useEffect(() => {
+        if (!user) history.push("/login");
+    }, [user]);
+
+    // if (user === null) {
+    //     return (
+    //         <Switch>
+    //             <Route path='/'>
+    //                 {
+    //                     auth ? <Login setUser={setUser}/> : <Redirect to='/trending'/>
+    //                 }
+    //             </Route>
+    //         </Switch>
+    //     );
+    // }
     return (
         <>
-            <Header user={user.name}/>
+            <Header />
             <Switch>
+                <Route path='/login' exact>
+                    <Login/>
+                </Route>
                 <Route path='/trending'>
                     <Trending/>
                 </Route>
@@ -42,7 +50,7 @@ export const UseRouter = () => {
                     <Search/>
                 </Route>
                 <Route path='/logout'>
-                    <LoginOut user={user.name} setUser={setUser}/>
+                    <LoginOut/>
                 </Route>
             </Switch>
         </>
