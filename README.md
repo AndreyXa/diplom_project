@@ -5,4 +5,3 @@ start project
                               -> 
                               
                               client: npm start
-                              server: json-server --watch src/server/db.json --port 3000
