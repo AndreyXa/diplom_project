@@ -4,7 +4,6 @@ import styled from './Header.module.css';
 import {ThemeProvider} from "styled-components";
 import {darkTheme, lightTheme} from "../Theme/theme";
 import {GlobalStyles} from "../Theme/globalStyles";
-import {listenToUserChange} from "../../firebase/auth";
 import {useUser} from "../../store/userContext";
 
 export const Header = () => {
@@ -13,8 +12,6 @@ export const Header = () => {
     const themeToggler = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light')
     };
-
-
 
     return (
         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -56,7 +53,7 @@ export const Header = () => {
                         </Link>
                     </li>
                     <li className={styled.navbarItem}>
-                        <button className={styled.buttonClick} onClick={themeToggler}>Switch Theme</button>
+                        <button className={styled.buttonClick} onClick={themeToggler}>Theme</button>
                     </li>
                 </ul>
             </nav>

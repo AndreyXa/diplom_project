@@ -24,10 +24,10 @@ export const Movies = () => {
         } else {
             alert("error" + response.status);
         }
-    }
+    };
 
     useEffect(() => {
-        fetchMovies();
+       fetchMovies();
     }, [page, genreforURL]);
 
     const handlePageChange = (e) => {
@@ -35,7 +35,7 @@ export const Movies = () => {
     };
 
     return (
-        <div >
+        <div>
             <span className={styled.pageTitle}>Movies</span>
             <Genres
                 type="movie"

@@ -18,7 +18,7 @@ export const Genres = ({
         } else {
             alert("error" + response.status);
         }
-    }
+    };
 
     useEffect(() => {
         fetchGenres();

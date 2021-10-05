@@ -2,13 +2,16 @@ import React from 'react';
 import styled from './LoginOut.module.css';
 import {useUser} from "../../store/userContext";
 import {signOut} from "../../firebase/auth";
+import {useHistory} from "react-router-dom";
 
 export const LoginOut = () => {
     const user = useUser();
+    const history = useHistory();
 
     const handleSubmit = async () => {
         // setUser(null);
         signOut();
+        history.push('/login');
     };
 
     return (

@@ -40,6 +40,7 @@ export const Login = () => {
 
     const getNewUser = async () => {
         createUser(login,password);
+        setOpen(false);
     };
 
     return (
